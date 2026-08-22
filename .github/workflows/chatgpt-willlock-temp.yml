@@ -31,9 +31,10 @@ jobs:
         shell: bash
         run: |
           APK=willlock-ci/app/build/outputs/apk/debug/app-debug.apk
+          BT="$ANDROID_HOME/build-tools/35.0.0"
           test -f "$APK"
-          apksigner verify --verbose "$APK"
-          aapt dump badging "$APK" | head -20
+          "$BT/apksigner" verify --verbose "$APK"
+          "$BT/aapt" dump badging "$APK" | head -20
           cp "$APK" WillLock-1.0.1.apk
           sha256sum WillLock-1.0.1.apk > WillLock-1.0.1.apk.sha256
       - uses: actions/upload-artifact@v4

@@ -58,7 +58,12 @@ object OwnerGuard {
         )
     }
 
-    fun remaining(context: Context, state: State = current(context) ?: return 0L): Long {
+    fun remaining(context: Context): Long {
+        val state = current(context) ?: return 0L
+        return remaining(context, state)
+    }
+
+    fun remaining(context: Context, state: State): Long {
         val value = if (state.boot == bootCount(context) && state.endElapsed > 0L) {
             state.endElapsed - SystemClock.elapsedRealtime()
         } else {

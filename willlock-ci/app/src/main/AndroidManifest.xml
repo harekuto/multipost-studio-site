@@ -21,10 +21,11 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".BlockAccessibilityService"
+            android:name=".PersistentBlockAccessibilityService"
             android:exported="false"
-            android:label="WillLock — блокировка приложений"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            android:label="WillLock — фоновая блокировка приложений"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:stopWithTask="false">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>

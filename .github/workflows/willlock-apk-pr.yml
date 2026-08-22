@@ -34,13 +34,14 @@ jobs:
           APK=willlock-ci/app/build/outputs/apk/debug/app-debug.apk
           test -f "$APK"
           "$ANDROID_SDK_ROOT/build-tools/35.0.0/apksigner" verify --verbose "$APK"
-          "$ANDROID_SDK_ROOT/build-tools/35.0.0/aapt" dump badging "$APK" | head -20
-          cp "$APK" WillLock-1.0.3.apk
-          sha256sum WillLock-1.0.3.apk > WillLock-1.0.3.apk.sha256
+          "$ANDROID_SDK_ROOT/build-tools/35.0.0/aapt" dump badging "$APK" | head -25
+          "$ANDROID_SDK_ROOT/build-tools/35.0.0/aapt" dump xmltree "$APK" AndroidManifest.xml | grep -E "OwnerWatchService|DEVICE_ADMIN_SERVICE|PersistentBlockAccessibilityService"
+          cp "$APK" WillLock-1.1.0.apk
+          sha256sum WillLock-1.1.0.apk > WillLock-1.1.0.apk.sha256
       - uses: actions/upload-artifact@v4
         with:
-          name: WillLock-1.0.3-apk
+          name: WillLock-1.1.0-apk
           path: |
-            WillLock-1.0.3.apk
-            WillLock-1.0.3.apk.sha256
+            WillLock-1.1.0.apk
+            WillLock-1.1.0.apk.sha256
           if-no-files-found: error
